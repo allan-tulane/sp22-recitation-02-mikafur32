@@ -87,7 +87,7 @@ def span_calc(n, a, b, f):
     """
     if n <= 1:
         return n
-    return span_calc(n // b, a, b) + f(n)
+    return span_calc(n // b, a, b, f) + f(n)
 
 
 def compare_work(work_fn1, work_fn2, sizes = [10, 20, 50, 100, 1000, 5000, 10000]):
@@ -131,5 +131,6 @@ def test_compare_work():
 
 
 def test_compare_span():
-    # TODO
-    pass
+    assert(span_calc(30, 3, 2, lambda n: n)) == 56
+    assert(span_calc(40, 2, 3, lambda n: n)) == 58
+    assert(span_calc(20, 1, 4, lambda n: n ** 2)) == 426
