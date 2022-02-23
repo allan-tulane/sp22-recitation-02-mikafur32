@@ -5,6 +5,7 @@ CMPS 2200  Recitation 2
 ### the only imports needed are here
 import tabulate
 import time
+import math
 
 
 ###
@@ -59,15 +60,15 @@ def work_calc(n, a, b, f):
     """
     if n <= 1:
         return n
-    return a * simple_work_calc(n // b, a, b) + f(n)
+    return simple_work_calc(n // b, a, b) + f(n)
 
 
 def test_work():
     """ done. """
 
-    assert work_calc(10, 2, 2, lambda n: 1) == 27
+    assert work_calc(10, 2, 2, lambda n: 1) == 14
     assert work_calc(20, 1, 2, lambda n: n * n) == 418
-    assert work_calc(30, 3, 2, lambda n: n) == 300
+    assert work_calc(30, 3, 2, lambda n: n) == 120
 
 
 def span_calc(n, a, b, f):
@@ -84,8 +85,9 @@ def span_calc(n, a, b, f):
 
     get rid of a, branching factor
     """
-    # TODO
-    pass
+    if n <= 1:
+        return n
+    return span_calc(n // b, a, b) + f(n)
 
 
 def compare_work(work_fn1, work_fn2, sizes = [10, 20, 50, 100, 1000, 5000, 10000]):
@@ -99,13 +101,16 @@ def compare_work(work_fn1, work_fn2, sizes = [10, 20, 50, 100, 1000, 5000, 10000
 
     """
     result = []
+    a = 3
+    b = 2
     for n in sizes:
-        # compute W(n) using current a, b, f
         result.append((
             n,
-            work_fn1(n),
-            work_fn2(n)
-        ))
+            work_fn1(n, a, b, lambda n: int(n ** (math.log(a, b) + 1))),
+            work_fn2(n, a, b, lambda n: int(n ** (math.log(a, b) - 1))
+                     )))
+        # subtracting or adding 1 to get > or < logb(a).
+
     return result
 
 
@@ -121,10 +126,10 @@ def test_compare_work():
     # curry work_calc to create multiple work
     # functions taht can be passed to compare_work
 
-    work_fn1 = work_calc(30, 3, 2, lambda n: n)
-    work_fn2 = work_calc(15, 2, 3, lambda n: n)
-    res = (compare_work(work_fn1, work_fn2))
+    res = (compare_work(work_calc, work_calc))
     print(res)
-    assert 0
-# def test_compare_span():
-# TODO
+
+
+def test_compare_span():
+    # TODO
+    pass
