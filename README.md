@@ -47,13 +47,19 @@ where $W(1) = 1$.
 - [ ] 3. (2 point) Now implement `work_calc`, which generalizes the above so that we can now input $a$, $b$ and a *function* $f(n)$ as arguments. Test this code by completing the test cases in `test_work` and adding 3 more cases.
 
 - [ ] 4. (2 point) Now, derive the asymptotic behavior of $W(n)$ using $f(n) = 1$, $f(n) = \log n$ and $f(n) = n$. Then, generate actual values for $W(n)$ for your code and confirm that the trends match your derivations.
+4. Value comparisons in main.py<br>
+f(n) = 1 : leaf dominated, O(n)<br>
+f(n) = log n: balanced tree, O(nlogn)<br>
+f(n) = n : root dominated, O(n^2)<br>
 
-**TODO: your answer goes here**
+- [ ] 5. (4 points) Now that you have a nice way to empirically generate values of $W(n)$, we can look at the relationship between $a$, $b$, and $f(n)$. Suppose that $f(n) = n^c$. What is the asypmptotic behavior of $W(n)$ if $c < \log_b a$? What about $c > \log_b a$? And if they are equal? Modify `compare_work` to compare empirical values for different work functions (at several different values of $n$) to justify your answer. 
 
-- [ ] 5. (4 points) Now that you have a nice way to empirically generate valuess of $W(n)$, we can look at the relationship between $a$, $b$, and $f(n)$. Suppose that $f(n) = n^c$. What is the asypmptotic behavior of $W(n)$ if $c < \log_b a$? What about $c > \log_b a$? And if they are equal? Modify `compare_work` to compare empirical values for different work functions (at several different values of $n$) to justify your answer. 
-
-**TODO: your answer goes here**
-
+5.
+If c<log_b(a) then the asymptotic behavior of the function n^c is still infinity but it grows quite slowly compared to when c>log_b(a).
+Overall, the limit when c<log_b(a) is 0.  When c>log_b(a) the limit goes toward infinity and is in O(nlog(n)).
+If c=log_b(a) then the behavior is a pure logarithmic equation and grows to infinity but slower compared to c>log_b(a) and is in O(log(n)).
 - [ ] 6. (3 points) $W(n)$ is meant to represent the running time of some recursive algorithm. Suppose we always had $a$ processors available to us and we wanted to compute the span of the same algorithm. Implement the function `span_calc` to compute the empirical span, where the work of the algorithm is given by $W(n)$. Implement `test_compare_span` to create a new comparison function for comparing span functions. Derive the asymptotic expressions for the span of the recurrences you used in problem 4 above. Confirm that everything matches up as it should. 
-
-**TODO: your answer goes here**
+Value comparisons in main.py<br>
+f(n) = 1 : leaf dominated, O(n)<br>
+f(n) = log n: balanced tree, O(nlogn)<br>
+f(n) = n : root dominated, O(n^2)<br>

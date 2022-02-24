@@ -68,8 +68,11 @@ def test_work():
 
     assert work_calc(10, 2, 2, lambda n: 1) == 14
     assert work_calc(20, 1, 2, lambda n: n * n) == 418
-    assert work_calc(30, 3, 2, lambda n: n) == 120
 
+#4
+    assert work_calc(30, 3, 2, lambda n: n) == 120
+    assert work_calc(30, 3, 2, lambda n: 1) == 91
+    assert work_calc(30, 3, 2, lambda n: int(math.log2(n))) == 94
 
 def span_calc(n, a, b, f):
     """Compute the span associated with the recurrence $W(n) = aW(n/b) + f(n)
@@ -132,5 +135,11 @@ def test_compare_work():
 
 def test_compare_span():
     assert(span_calc(30, 3, 2, lambda n: n)) == 56
-    assert(span_calc(40, 2, 3, lambda n: n)) == 58
     assert(span_calc(20, 1, 4, lambda n: n ** 2)) == 426
+
+    #6
+    assert span_calc(40, 2, 3, lambda n: n) == 58
+    assert span_calc(40, 2, 3, lambda n: 1) == 4
+    assert span_calc(40, 2, 3, lambda n: int(math.log2(n))) == 11
+
+
